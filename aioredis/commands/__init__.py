@@ -47,8 +47,10 @@ class Redis(GenericCommandsMixin, StringCommandsMixin,
     def __repr__(self):
         return '<{} {!r}>'.format(self.__class__.__name__, self._pool_or_conn)
 
-    def execute(self, command, *args, **kwargs):
+    def execute_command(self, command, *args, **kwargs):
         return self._pool_or_conn.execute(command, *args, **kwargs)
+
+    execute = execute_command
 
     def close(self):
         """Close client connections."""
